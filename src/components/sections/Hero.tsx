@@ -81,12 +81,11 @@ export default function Hero() {
       </div>
       <div
         className="
-      max-w-7xl
+      max-w-5xl
       mx-auto
       px-8
       w-full
       grid
-      lg:grid-cols-2
       gap-16
       items-center
     "
@@ -154,40 +153,7 @@ export default function Hero() {
         </div>
 
         {/* RIGHT PHOTO */}
-        <div className="flex justify-center lg:justify-end">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1 }}
-            className="relative"
-          >
-            {/* Glow */}
-            <div
-              className="
-            absolute
-            inset-0
-            rounded-full
-            bg-transparent
-            blur-3xl
-            scale-110
-          "
-            />
-
-            <img
-              src="/img.png"
-              alt="Gokulanand"
-              className="
-            relative
-            z-10
-            w-[280px]
-            md:w-[380px]
-            lg:w-[450px]
-            rounded-[40px]
-          
-          "
-            />
-          </motion.div>
-        </div>
+       
       </div>
     </section>
   );
