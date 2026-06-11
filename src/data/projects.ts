@@ -26,7 +26,7 @@ export const projects = [
         "Node.js",
         "Email Integration",
       ],
-      liveUrl: "https://skwoodenlights.com/Home",
+      liveUrl: "https://www.skwoodenlights.com/Home",
 
     },
     {
