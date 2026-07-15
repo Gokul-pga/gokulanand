@@ -131,7 +131,7 @@ export default function Hero() {
             high-performance applications with exceptional user experiences.
           </p>
 
-          <div className="mt-10 flex gap-4">
+          <div className="mt-10 flex flex-col md:flex-row gap-4">
             <button
               onClick={() => {
                 router.push("/pages/Projects");
@@ -153,7 +153,6 @@ export default function Hero() {
         </div>
 
         {/* RIGHT PHOTO */}
-       
       </div>
     </section>
   );
