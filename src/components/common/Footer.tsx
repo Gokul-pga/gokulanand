@@ -5,7 +5,7 @@ import { FaGithub, FaLinkedinIn, FaInstagram } from "react-icons/fa";
 
 export default function Footer() {
   return (
-    <footer className="relative overflow-hidden bg-black text-white">
+    <footer className="relative overflow-hidden bg-black text-white pb-8 md:pb-0">
       <div className="max-w-7xl mx-auto px-6 py-24">
         {/* Top */}
         <div className="grid md:grid-cols-2 gap-12">
