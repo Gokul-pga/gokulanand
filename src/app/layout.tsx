@@ -3,6 +3,7 @@ import "./globals.css";
 import Navbar from "../components/common/Navbar";
 import Footer from "../components/common/Footer";
 import CustomCursor from "../components/common/CustomCursor";
+import ScrollToTop from "../components/common/ScrollToTop";
 
 const bebas = Bebas_Neue({
   weight: "400",
@@ -23,7 +24,11 @@ export default function RootLayout({
       <body
         className={`${bebas.variable} ${spaceGrotesk.variable} md:cursor-none`}
       >
-        <CustomCursor /> <Navbar />
+        {/* Cursor & Global Core Elements */}
+        <CustomCursor />
+        <ScrollToTop />
+
+        <Navbar />
         {children}
         <Footer />
       </body>
