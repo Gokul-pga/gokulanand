@@ -4,6 +4,9 @@ import { useRef, useState } from "react";
 import {
   AnimatePresence,
   motion,
+  useMotionValue,
+  useSpring,
+  useTransform,
   useMotionValueEvent,
   useScroll,
 } from "framer-motion";
@@ -29,7 +32,38 @@ export default function ProjectsListing() {
   });
 
   const activeProject = projects[activeIndex];
+  const rotateX = useMotionValue(0);
+  const rotateY = useMotionValue(0);
 
+  const smoothRotateX = useSpring(rotateX, {
+    stiffness: 180,
+    damping: 18,
+  });
+
+  const smoothRotateY = useSpring(rotateY, {
+    stiffness: 180,
+    damping: 18,
+  });
+
+  const imageX = useTransform(smoothRotateY, [-12, 12], [20, -20]);
+  const imageY = useTransform(smoothRotateX, [-12, 12], [-20, 20]);
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    const rotateYValue = (x / rect.width - 0.5) * 18;
+    const rotateXValue = -(y / rect.height - 0.5) * 18;
+
+    rotateX.set(rotateXValue);
+    rotateY.set(rotateYValue);
+  };
+
+  const handleMouseLeave = () => {
+    rotateX.set(0);
+    rotateY.set(0);
+  };
   return (
     <>
       <section
@@ -300,17 +334,27 @@ export default function ProjectsListing() {
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={activeProject.image || activeProject.id}
-                    initial={{ opacity: 0, scale: 0.9 }}
+                    initial={{ opacity: 0, scale: 0.92 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 1.1 }}
+                    exit={{ opacity: 0, scale: 1.08 }}
                     transition={{ duration: 0.7 }}
+                    onMouseMove={handleMouseMove}
+                    onMouseLeave={handleMouseLeave}
+                    style={{
+                      rotateX: smoothRotateX,
+                      rotateY: smoothRotateY,
+                      transformPerspective: 1200,
+                    }}
                     className="
-        relative
-        overflow-hidden
-        rounded-[10px]
-        border
-        border-white/10
-      "
+    relative
+    overflow-hidden
+    rounded-[24px]
+    border
+    border-white/10
+    bg-neutral-900
+    shadow-[0_30px_80px_rgba(0,0,0,0.45)]
+    cursor-pointer
+"
                   >
                     {activeProject.image ? (
                       <Image
