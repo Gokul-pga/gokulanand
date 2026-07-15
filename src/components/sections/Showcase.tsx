@@ -345,7 +345,27 @@ const DevelopmentJourney = () => {
         </motion.div>
 
         {/* Phase Navigation Tabs - Responsive Touch Scroller on Mobile */}
-        <div className="flex overflow-x-auto pb-4 mb-12 gap-3 justify-start md:justify-center -mx-4 px-4 md:mx-0 md:px-0 scrollbar-none snap-x">
+        <div
+          className="
+    flex
+    md:flex-wrap
+    justify-start
+    md:justify-center
+    overflow-x-auto
+    md:overflow-visible
+    pb-4
+    mb-12
+    gap-3
+    -mx-4
+    px-4
+    md:mx-0
+    md:px-0
+    scrollbar-none
+    snap-x
+    md:snap-none
+  "
+        >
+          {" "}
           {phases.map((phase, index) => (
             <motion.button
               key={phase.id}
@@ -552,7 +572,7 @@ const DevelopmentJourney = () => {
         </div>
 
         {/* Bottom CTA */}
-        <motion.div
+        {/* <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.4 }}
@@ -566,7 +586,7 @@ const DevelopmentJourney = () => {
               Let's Build Together
             </button>
           </div>
-        </motion.div>
+        </motion.div> */}
       </div>
     </section>
   );
