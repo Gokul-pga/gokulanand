@@ -41,7 +41,7 @@ export default function ScrollToTop() {
   return (
     <button
       onClick={scrollToTop}
-      className={`fixed bottom-8 right-8 z-[9990] flex items-center justify-center w-12 h-12 bg-black rounded-full border border-white/10 shadow-2xl transition-all duration-500 ease-out active:scale-95 group clickable ${
+      className={`fixed bottom-28 md:bottom-8 right-8 z-[9990] flex items-center justify-center w-12 h-12 bg-black rounded-full border border-white/10 shadow-2xl transition-all duration-500 ease-out active:scale-95 group clickable ${
         isVisible
           ? "translate-y-0 opacity-100 scale-100"
           : "translate-y-6 opacity-0 scale-75 pointer-events-none"
@@ -62,7 +62,7 @@ export default function ScrollToTop() {
           cx="24"
           cy="24"
           r="18"
-          className="stroke-emerald-400 transition-all duration-75"
+          className="stroke-white transition-all duration-75"
           strokeWidth="2"
           fill="transparent"
           strokeDasharray="113"
