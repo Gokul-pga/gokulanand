@@ -1,32 +1,39 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
-import { HiOutlineMenuAlt4, HiX } from "react-icons/hi";
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { motion } from "framer-motion";
+import { usePathname, useRouter } from "next/navigation";
+import { FiUser, FiSliders, FiBriefcase, FiMail } from "react-icons/fi";
+
 const menuItems = [
   {
     name: "About",
     path: "/pages/About",
+    icon: FiUser,
   },
   {
     name: "Skills",
     path: "/pages/Skillsets",
+    icon: FiSliders,
   },
   {
     name: "Projects",
     path: "/pages/Projects",
+    icon: FiBriefcase,
   },
   {
     name: "Contact",
     path: "/pages/Contact",
+    icon: FiMail,
   },
 ];
+
 export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
+  const pathname = usePathname();
+
   return (
     <>
+      {/* --- TOP BRAND HEADER (All Screens) --- */}
       <motion.nav
         initial={{ y: -80, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
@@ -34,10 +41,10 @@ export default function Navbar() {
           duration: 0.8,
           ease: [0.22, 1, 0.36, 1],
         }}
-        className="fixed top-0 left-0 z-50 w-full bg-white/90 backdrop-blur-md border-b border-gray-100"
+        className="fixed top-0 left-0 z-50 w-full bg-white/90 backdrop-blur-md border-b border-gray-100 h-20 flex items-center"
       >
-        <div className="mx-auto max-w-7xl px-6 md:px-8 h-20 flex items-center justify-between">
-          {/* Logo */}
+        <div className="mx-auto w-full max-w-7xl px-6 md:px-8 flex items-center justify-between">
+          {/* Brand Logo */}
           <motion.h1
             initial={{ y: 60 }}
             animate={{ y: 0 }}
@@ -48,15 +55,16 @@ export default function Navbar() {
             onClick={() => router.push("/")}
             className="
               font-[var(--font-bebas)]
-              text-xl md:text-4xl
+              text-2xl md:text-4xl
               tracking-[0.25em]
               text-black cursor-pointer
+              clickable
             "
           >
             GOKULANAND
           </motion.h1>
 
-          {/* Desktop Menu */}
+          {/* DESKTOP MENU (Hidden on Mobile) */}
           <div
             className="
               hidden md:flex
@@ -69,110 +77,82 @@ export default function Navbar() {
               text-gray-600
             "
           >
-            {menuItems.map((item, index) => (
-              <motion.button
-                key={item.name}
-                onClick={() => router.push(item.path)}
-                initial={{ y: 30 }}
-                animate={{ y: 0 }}
-                transition={{
-                  duration: 0.6,
-                  delay: 0.4 + index * 0.1,
-                }}
-                className="
-      hover:text-black
-      transition-colors
-      cursor-pointer
-    "
-              >
-                {item.name}
-              </motion.button>
-            ))}
+            {menuItems.map((item, index) => {
+              const isActive = pathname === item.path;
+              return (
+                <motion.button
+                  key={item.name}
+                  onClick={() => router.push(item.path)}
+                  initial={{ y: 30 }}
+                  animate={{ y: 0 }}
+                  transition={{
+                    duration: 0.6,
+                    delay: 0.4 + index * 0.1,
+                  }}
+                  className={`
+                    relative py-2 transition-colors cursor-pointer clickable
+                    ${
+                      isActive ? "text-black font-semibold" : "hover:text-black"
+                    }
+                  `}
+                >
+                  {item.name}
+                  {isActive && (
+                    <motion.div
+                      layoutId="desktopActiveUnderline"
+                      className="absolute bottom-0 left-0 w-full h-[2px] bg-black"
+                      transition={{
+                        type: "spring",
+                        stiffness: 380,
+                        damping: 30,
+                      }}
+                    />
+                  )}
+                </motion.button>
+              );
+            })}
           </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            className="md:hidden text-3xl text-gray-700"
-            onClick={() => setIsOpen(true)}
-          >
-            <HiOutlineMenuAlt4 />
-          </button>
         </div>
       </motion.nav>
 
-      {/* Mobile Menu */}
-      <AnimatePresence>
-        {isOpen && (
-          <>
-            {/* Overlay */}
-            <motion.div
-              className="fixed inset-0 bg-black/20 backdrop-blur-sm z-50"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setIsOpen(false)}
-            />
+      {/* --- MOBILE BOTTOM NAVIGATION DOCK (Hidden on Desktop) --- */}
+      <div className="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-md">
+        <nav className="bg-black/90 backdrop-blur-lg border border-white/10 rounded-full px-4 py-3 shadow-[0_8px_32px_rgba(0,0,0,0.37)] flex items-center justify-between">
+          {menuItems.map((item) => {
+            const Icon = item.icon;
+            const isActive = pathname === item.path;
 
-            {/* Sidebar */}
-            <motion.div
-              initial={{ x: "100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "100%" }}
-              transition={{
-                duration: 0.5,
-                ease: [0.22, 1, 0.36, 1],
-              }}
-              className="
-                fixed
-                top-0
-                right-0
-                z-[60]
-                h-screen
-                w-[80%]
-                bg-white
-                p-8
-              "
-            >
-              <div className="flex justify-end">
-                <button
-                  className="text-4xl text-gray-700"
-                  onClick={() => setIsOpen(false)}
+            return (
+              <button
+                key={item.name}
+                onClick={() => router.push(item.path)}
+                className="relative flex flex-col items-center justify-center flex-1 py-1.5 focus:outline-none transition-all duration-300"
+              >
+                {/* Active Pill Background */}
+                {isActive && (
+                  <motion.div
+                    layoutId="mobileActivePill"
+                    className="absolute inset-0 bg-white/10 rounded-full z-0"
+                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                  />
+                )}
+
+                {/* Icon & Label stack */}
+                <div
+                  className={`relative z-10 flex flex-col items-center gap-1 transition-colors duration-300 ${
+                    isActive ? "text-white" : "text-gray-400"
+                  }`}
                 >
-                  <HiX />
-                </button>
-              </div>
-
-              <div className="mt-16 flex flex-col gap-8">
-                {menuItems.map((item, index) => (
-                  <motion.button
-                    key={item.name}
-                    onClick={() => {
-                      router.push(item.path);
-                      setIsOpen(false);
-                    }}
-                    initial={{ x: 50, opacity: 0 }}
-                    animate={{ x: 0, opacity: 1 }}
-                    transition={{
-                      delay: index * 0.1,
-                    }}
-                    className="
-      text-left
-      text-xl
-      uppercase
-      tracking-[0.15em]
-      font-[var(--font-space)]
-      text-gray-700
-      cursor-pointer
-    "
-                  >
+                  <Icon className="text-xl" />
+                  <span className="text-[10px] font-medium tracking-wider uppercase font-[var(--font-space)]">
                     {item.name}
-                  </motion.button>
-                ))}
-              </div>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
+                  </span>
+                </div>
+              </button>
+            );
+          })}
+        </nav>
+      </div>
     </>
   );
 }
