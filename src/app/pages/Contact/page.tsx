@@ -174,35 +174,113 @@ font-semibold
         </div>
 
         {/* Availability */}
-        <div className="mt-24">
-          <h2 className="text-4xl text-black font-bold mb-10">
-            Currently Available For
-          </h2>
-
-          <div className="flex flex-wrap gap-4">
-            {[
-              "Full Time Opportunities",
-              "Freelance Projects",
-              "Remote Work",
-              "Contract Work",
-              "Startup Collaborations",
-            ].map((item) => (
-              <div
-                key={item}
-                className="
-                  px-6
-                  py-3
-                  rounded-full
-                  bg-gradient-to-r
-                  from-blue-200
-                  to-slate-500
-                  border
-                  border-blue-100 text-white
-                "
-              >
-                ✓ {item}
+        <div className="mt-24 bg-gradient-to-br from-gray-50 to-white rounded-3xl p-12 border border-gray-100 shadow-sm">
+          <div className="flex items-start justify-between flex-wrap gap-6">
+            <div>
+              <div className="flex items-center gap-3 mb-4">
+                <div className="p-2 bg-green-100 rounded-xl">
+                  <svg
+                    className="w-6 h-6 text-green-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M5 13l4 4L19 7"
+                    />
+                  </svg>
+                </div>
+                <span className="text-sm font-semibold text-green-700 bg-green-50 px-3 py-1 rounded-full">
+                  Available Now
+                </span>
               </div>
-            ))}
+
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-3">
+                Let's Work Together
+              </h2>
+              <p className="text-gray-600 text-lg max-w-2xl">
+                I'm currently available for exciting opportunities. Whether it's
+                a full-time role or a freelance project, I'm ready to make a
+                difference.
+              </p>
+            </div>
+
+            <div className="bg-white rounded-2xl p-4 shadow-sm border border-gray-100">
+              <div className="flex items-center gap-4">
+                <div className="text-right">
+                  <div className="text-2xl font-bold text-gray-900">2+</div>
+                  <div className="text-sm text-gray-500">Years Experience</div>
+                </div>
+                <div className="w-px h-12 bg-gray-200" />
+                <div className="text-right">
+                  <div className="text-2xl font-bold text-gray-900">5+</div>
+                  <div className="text-sm text-gray-500">
+                    Projects Delivered
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-10">
+            <div className="flex flex-wrap gap-3">
+              {[
+                { label: "Full Time", icon: "💼", color: "blue" },
+                { label: "Freelance", icon: "🚀", color: "purple" },
+                { label: "Remote", icon: "🌍", color: "emerald" },
+                { label: "Contract", icon: "📝", color: "orange" },
+                { label: "Startups", icon: "🤝", color: "pink" },
+              ].map((item) => (
+                <motion.div
+                  key={item.label}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className={`
+            group relative px-6 py-3 rounded-full
+            bg-white border-2 
+            transition-all duration-300
+            hover:shadow-lg
+            cursor-default
+            flex items-center gap-2
+          `}
+                  style={{
+                    borderColor: `var(--${item.color}-200)`,
+                  }}
+                >
+                  <span className="text-xl">{item.icon}</span>
+                  <span className="font-medium text-gray-800">
+                    {item.label}
+                  </span>
+                  <span
+                    className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+                    style={{
+                      background: `linear-gradient(135deg, var(--${item.color}-500), var(--${item.color}-600))`,
+                      opacity: 0.05,
+                    }}
+                  />
+                  <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
+                </motion.div>
+              ))}
+            </div>
+          </div>
+
+          <div className="mt-8 pt-8 border-t border-gray-100 flex flex-wrap items-center justify-between gap-4">
+            <div className="flex items-center gap-4 text-sm text-gray-500">
+              <span>📧 gokulanand2508@gmail.com</span>
+              <span>|</span>
+              <span>⏰ Response within 24 hours</span>
+            </div>
+            {/* <div className="flex gap-2">
+              <button className="px-6 py-2 bg-gray-900 text-white rounded-full text-sm font-medium hover:bg-gray-800 transition-colors">
+                Get in Touch
+              </button>
+              <button className="px-6 py-2 bg-white text-gray-700 rounded-full text-sm font-medium border border-gray-200 hover:bg-gray-50 transition-colors">
+                View Portfolio
+              </button>
+            </div> */}
           </div>
         </div>
 
