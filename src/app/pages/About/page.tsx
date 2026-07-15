@@ -2,23 +2,162 @@
 
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
-
-const techStack = [
-  "NEXT.JS",
-  "REACT",
-  "TYPESCRIPT",
-  "TAILWIND",
-  "REDUX",
-  "NODE.JS",
-  "EXPRESS",
-  "SPRING BOOT",
-  "MONGODB",
-  "REACT NATIVE",
+import {
+  SiNextdotjs,
+  SiReact,
+  SiTailwindcss,
+  SiMui,
+  SiRedux,
+  SiNodedotjs,
+  SiExpress,
+  SiSpringboot,
+  SiMongodb,
+} from "react-icons/si";
+import { FiServer, FiBookOpen, FiCode, FiTrendingUp } from "react-icons/fi";
+import { FiBriefcase, FiCheckSquare, FiCpu, FiHeart } from "react-icons/fi";
+const technologies = [
+  {
+    name: "Next.js 14",
+    icon: SiNextdotjs,
+    color: "#000000",
+    bg: "#f0f0f0",
+  },
+  {
+    name: "React 18",
+    icon: SiReact,
+    color: "#61DAFB",
+    bg: "#e8f8ff",
+  },
+  {
+    name: "Tailwind CSS",
+    icon: SiTailwindcss,
+    color: "#06B6D4",
+    bg: "#e6fafd",
+  },
+  {
+    name: "Material UI",
+    icon: SiMui,
+    color: "#007FFF",
+    bg: "#e6f0ff",
+  },
+  {
+    name: "Redux Toolkit",
+    icon: SiRedux,
+    color: "#764ABC",
+    bg: "#f3edff",
+  },
+  {
+    name: "Node.js",
+    icon: SiNodedotjs,
+    color: "#339933",
+    bg: "#eafaf0",
+  },
+  {
+    name: "Express.js",
+    icon: SiExpress,
+    color: "#444444",
+    bg: "#f5f5f5",
+  },
+  {
+    name: "Spring Boot",
+    icon: SiSpringboot,
+    color: "#6DB33F",
+    bg: "#edf7e8",
+  },
+  {
+    name: "MongoDB Atlas",
+    icon: SiMongodb,
+    color: "#47A248",
+    bg: "#e8f5ed",
+  },
+  {
+    name: "REST APIs",
+    icon: FiServer,
+    color: "#FF6B35",
+    bg: "#fff0e8",
+  },
 ];
-
+const journey = [
+  {
+    year: "2019",
+    title: "Started Engineering",
+    icon: FiBookOpen,
+    description:
+      "Started my Bachelor's in Mechatronics Engineering, building analytical thinking and problem-solving skills.",
+  },
+  {
+    year: "2021",
+    title: "Began Web Development",
+    icon: FiCode,
+    description:
+      "Discovered web development and started building responsive websites using HTML, CSS, JavaScript and React.",
+  },
+  {
+    year: "2023",
+    title: "Joined Avitam Technologies",
+    icon: FiBriefcase,
+    description:
+      "Started my professional career as a MERN Stack Developer, working on enterprise-grade applications.",
+  },
+  {
+    year: "Today",
+    title: "Full Stack Developer",
+    icon: FiTrendingUp,
+    description:
+      "Building scalable web applications, admin dashboards, APIs and mobile apps with modern technologies.",
+  },
+];
 export default function AboutPage() {
   const router = useRouter();
+  const metricsData = [
+    {
+      value: "5+",
+      label: "Projects Built",
+      icon: FiCheckSquare,
+      color: "from-indigo-500/10 to-violet-500/10",
+    },
+    {
+      value: "2+",
+      label: "Years Experience",
+      icon: FiBriefcase,
+      color: "from-blue-500/10 to-cyan-500/10",
+    },
+    {
+      value: "10+",
+      label: "Technologies",
+      icon: FiCpu,
+      color: "from-pink-500/10 to-rose-500/10",
+    },
+    {
+      value: "100%",
+      label: "Pure Commitment",
+      icon: FiHeart,
+      color: "from-amber-500/10 to-orange-500/10",
+    },
+  ];
 
+  const containerVariants = {
+    hidden: {},
+    show: {
+      transition: {
+        staggerChildren: 0.15,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: {
+      opacity: 0,
+      y: 40,
+    },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+      },
+    },
+  };
   return (
     <main className="relative overflow-hidden bg-white text-black">
       {/* Background Effects */}
@@ -72,7 +211,6 @@ export default function AboutPage() {
       "
         />
       </div>
-
       {/* HERO */}
       <section className="relative min-h-screen flex items-center px-6">
         <div className="max-w-7xl mx-auto">
@@ -154,155 +292,421 @@ export default function AboutPage() {
           ABOUT
         </div>
       </section>
-
       {/* STATS */}
-      <section className="py-24 px-6">
-        <div className="max-w-7xl mx-auto grid md:grid-cols-4 gap-6">
-          {[
-            ["5+", "Projects"],
-            ["2+", "Years Experience"],
-            ["10+", "Technologies"],
-            ["100%", "Commitment"],
-          ].map(([value, label]) => (
-            <motion.div
-              key={label}
-              whileHover={{
-                y: -10,
-                scale: 1.03,
-              }}
-              className="
-            rounded-3xl
-            p-10
-            border
-            border-white
-            bg-white/60
-            backdrop-blur-xl
-            shadow-xl
-          "
-            >
-              <h2
+      <section className=" px-4 md:px-6 bg-gradient-to-b from-transparent to-gray-50/50 overflow-hidden">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.2 }}
+          className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
+        >
+          {metricsData.map((item, index) => {
+            const IconComponent = item.icon;
+            return (
+              <motion.div
+                key={item.label}
+                variants={itemVariants}
+                whileHover={{
+                  y: -4,
+                  transition: {
+                    duration: 0.25,
+                  },
+                }}
                 className="
-              text-6xl
-              font-black
-              bg-gradient-to-r
-              from-slate-500
-              via-gray-400
-              to-gray-200
-              bg-clip-text
-              text-transparent
-            "
+    group
+    relative
+    rounded-2xl
+    border
+    border-gray-200
+    bg-white
+    p-8
+    transition-all
+    duration-300
+    hover:border-gray-300
+    hover:shadow-lg
+  "
               >
-                {value}
-              </h2>
+                {/* Top */}
+                <div className="flex items-start justify-between">
+                  <div
+                    className="
+        flex
+        h-12
+        w-12
+        items-center
+        justify-center
+        rounded-xl
+        bg-gray-100
+        transition-colors
+        duration-300
+        group-hover:bg-black
+      "
+                  >
+                    <IconComponent
+                      className="
+          text-xl
+          text-gray-600
+          group-hover:text-white
+          transition-colors
+        "
+                    />
+                  </div>
 
-              <p className="mt-4 text-gray-600">{label}</p>
-            </motion.div>
-          ))}
-        </div>
+                  <span
+                    className="
+        text-xs
+        font-medium
+        text-gray-400
+      "
+                  >
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                </div>
+
+                {/* Value */}
+                <div className="mt-10">
+                  <h2
+                    className="
+        text-5xl
+        md:text-6xl
+        font-black
+        tracking-tight
+        text-black
+      "
+                  >
+                    {item.value}
+                  </h2>
+
+                  <div className="mt-4 h-px w-12 bg-gray-200 group-hover:w-20 transition-all duration-300" />
+
+                  <p
+                    className="
+        mt-4
+        text-sm
+        font-medium
+        tracking-wide
+        text-gray-500
+      "
+                  >
+                    {item.label}
+                  </p>
+                </div>
+              </motion.div>
+            );
+          })}
+        </motion.div>
       </section>
       {/* Journey */}
-      <section className="py-32 px-6 bg-gray-50">
+      <section className="py-5 px-6 bg-gray-50 overflow-hidden">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-5xl md:text-7xl font-bold mb-20">My Journey</h2>
+          <motion.h2
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+            className="text-5xl md:text-7xl font-bold text-center mb-20"
+          >
+            My Journey
+          </motion.h2>
 
-          <div className="grid lg:grid-cols-2 gap-16">
-            <div>
-              <p className="text-lg text-gray-600 leading-relaxed">
+          <div className="grid lg:grid-cols-2 gap-20 mb-20">
+            <motion.div
+              initial={{ opacity: 0, x: -80 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
+              <p className="text-lg text-gray-600 leading-9">
                 My journey began in Mechatronics Engineering where I developed
                 strong analytical thinking and problem-solving skills. Over
-                time, my passion shifted towards software engineering and
+                time, my passion shifted toward software engineering and
                 creating digital experiences.
               </p>
 
-              <p className="text-lg text-gray-600 leading-relaxed mt-8">
-                Today I build enterprise-grade applications, admin dashboards,
-                mobile apps, and scalable backend systems using modern
-                technologies.
+              <p className="text-lg text-gray-600 leading-9 mt-8">
+                Today I build enterprise-grade applications, scalable backend
+                systems, mobile apps and modern user experiences using
+                cutting-edge technologies.
               </p>
-            </div>
+            </motion.div>
 
-            <div className="space-y-10">
-              <div>
-                <span className="text-gray-500">2019</span>
-                <h3 className="text-2xl font-bold">Started Engineering</h3>
-              </div>
+            <div className="relative">
+              {/* Vertical Line */}
+              <motion.div
+                initial={{ scaleY: 0 }}
+                whileInView={{ scaleY: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 1.2 }}
+                style={{ originY: 0 }}
+                className="absolute left-5 top-0 w-[2px] h-full bg-gray-300"
+              />
 
-              <div>
-                <span className="text-gray-500">2021</span>
-                <h3 className="text-2xl font-bold">Began Web Development</h3>
-              </div>
+              <div className="space-y-12">
+                {journey.map((item, index) => {
+                  const Icon = item.icon;
 
-              <div>
-                <span className="text-gray-500">2023</span>
-                <h3 className="text-2xl font-bold">
-                  Joined Avitam Technologies
-                </h3>
-              </div>
+                  return (
+                    <motion.div
+                      key={item.title}
+                      initial={{
+                        opacity: 0,
+                        x: index % 2 === 0 ? 80 : -80,
+                      }}
+                      whileInView={{
+                        opacity: 1,
+                        x: 0,
+                      }}
+                      viewport={{ once: true }}
+                      transition={{
+                        duration: 0.7,
+                        delay: index * 0.15,
+                      }}
+                      whileHover={{
+                        y: -6,
+                      }}
+                      className="relative pl-16"
+                    >
+                      {/* Timeline Dot */}
 
-              <div>
-                <span className="text-gray-500">Today</span>
-                <h3 className="text-2xl font-bold">Full Stack Developer</h3>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+                      <motion.div
+                        animate={{
+                          scale: [1, 1.2, 1],
+                        }}
+                        transition={{
+                          repeat: Infinity,
+                          duration: 2,
+                        }}
+                        className="
+                    absolute
+                    left-0
+                    top-3
+                    w-10
+                    h-10
+                    rounded-full
+                    bg-black
+                    flex
+                    items-center
+                    justify-center
+                    text-white
+                  "
+                      >
+                        <Icon size={18} />
+                      </motion.div>
 
-      {/* Experience */}
-      <section className="py-32 px-6">
-        <div className="max-w-7xl mx-auto">
-          <p className="uppercase tracking-[0.4em] text-gray-500 mb-5">
-            Experience
-          </p>
-
-          <h2 className="text-5xl md:text-7xl font-bold mb-16">
-            Professional Experience
-          </h2>
-
-          <div className="border-l-2 border-black pl-10">
-            <span className="text-gray-500">Nov 2023 – Present</span>
-
-            <h3 className="text-4xl font-bold mt-3">MERN Stack Developer</h3>
-
-            <p className="text-xl mt-3">Avitam Technologies</p>
-
-            <p className="mt-8 text-gray-600 leading-relaxed">
-              Architecting full-stack solutions from concept to deployment.
-              Designing REST APIs, developing responsive interfaces, and
-              delivering business-critical applications.
-            </p>
-
-            <div className="grid md:grid-cols-2 gap-5 mt-10">
-              {[
-                "Next.js 14",
-                "React 18",
-                "Tailwind CSS",
-                "Material UI",
-                "Redux Toolkit",
-                "Node.js",
-                "Express.js",
-                "Spring Boot",
-                "MongoDB Atlas",
-                "REST APIs",
-              ].map((item) => (
-                <div
-                  key={item}
-                  className="
+                      <div
+                        className="
+                    bg-white
+                    rounded-3xl
+                    p-7
                     border
                     border-gray-200
-                    rounded-2xl
-                    p-4
+                    transition-all
+                    duration-300
+                    hover:shadow-xl
                   "
-                >
-                  {item}
-                </div>
-              ))}
+                      >
+                        <span className="text-sm text-gray-500 font-medium">
+                          {item.year}
+                        </span>
+
+                        <h3 className="text-2xl font-bold mt-2">
+                          {item.title}
+                        </h3>
+
+                        <p className="text-gray-600 leading-8 mt-4">
+                          {item.description}
+                        </p>
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </div>
             </div>
           </div>
         </div>
       </section>
+      {/* Experience */}
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10 m-5">
+        {technologies.map(({ name, icon: Icon, color, bg }) => (
+          <div
+            key={name}
+            className="
+        group
+        relative
+        flex
+        items-center
+        gap-4
+        rounded-2xl
+        bg-white/80
+        backdrop-blur-sm
+        p-5
+        transition-all
+        duration-500
+        ease-out
+        hover:-translate-y-2
+        hover:shadow-2xl
+        hover:shadow-black/10
+        cursor-pointer
+        border
+        border-white/20
+        hover:border-opacity-100
+        overflow-hidden
+      "
+            style={{
+              borderColor: `${color}20`,
+            }}
+          >
+            {/* Animated gradient background */}
+            <div
+              className="
+          absolute
+          inset-0
+          opacity-0
+          group-hover:opacity-100
+          transition-opacity
+          duration-500
+          bg-gradient-to-br
+          from-white
+          via-transparent
+          to-transparent
+        "
+              style={{
+                background: `radial-gradient(circle at 0% 0%, ${color}15, transparent 70%)`,
+              }}
+            />
 
-      {/* TECH MARQUEE */}
+            {/* Glow effect on hover */}
+            <div
+              className="
+          absolute
+          -inset-0.5
+          opacity-0
+          group-hover:opacity-100
+          transition-opacity
+          duration-500
+          blur-2xl
+        "
+              style={{
+                background: `radial-gradient(circle at 30% 30%, ${color}20, transparent 70%)`,
+              }}
+            />
+
+            {/* Icon container */}
+            <div
+              className="
+          relative
+          flex
+          h-14
+          w-14
+          shrink-0
+          items-center
+          justify-center
+          rounded-2xl
+          transition-all
+          duration-500
+          ease-out
+          group-hover:scale-110
+          group-hover:rotate-3
+        "
+              style={{
+                background: bg,
+                boxShadow: `0 4px 12px ${color}25`,
+              }}
+            >
+              <Icon
+                size={28}
+                className="
+            transition-all
+            duration-300
+            group-hover:scale-110
+          "
+                style={{ color }}
+              />
+
+              {/* Floating dot animation */}
+              <div
+                className="
+            absolute
+            -top-1
+            -right-1
+            h-3
+            w-3
+            rounded-full
+            opacity-0
+            group-hover:opacity-100
+            transition-all
+            duration-300
+            animate-pulse
+          "
+                style={{ background: color }}
+              />
+            </div>
+
+            {/* Text content */}
+            <div className="relative flex-1">
+              <span
+                className="
+            text-base
+            font-semibold
+            tracking-tight
+            text-gray-800
+            transition-colors
+            duration-300
+            group-hover:text-gray-900
+          "
+              >
+                {name}
+              </span>
+
+              {/* Underline animation */}
+              <div
+                className="
+            mt-1
+            h-0.5
+            w-0
+            rounded-full
+            transition-all
+            duration-500
+            ease-out
+            group-hover:w-full
+          "
+                style={{ background: color }}
+              />
+            </div>
+
+            {/* Arrow indicator */}
+            <div
+              className="
+          relative
+          opacity-0
+          -translate-x-2
+          group-hover:opacity-100
+          group-hover:translate-x-0
+          transition-all
+          duration-400
+          ease-out
+        "
+            >
+              <svg
+                className="h-5 w-5"
+                style={{ color }}
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
+            </div>
+          </div>
+        ))}
+      </div>
+      ;{/* TECH MARQUEE */}
       <section className="overflow-hidden py-20 border-y">
         <motion.div
           animate={{
@@ -354,7 +758,6 @@ export default function AboutPage() {
             ))}
         </motion.div>
       </section>
-
       {/* CTA */}
       <section className="py-40 px-6 text-center">
         <h2 className="text-6xl md:text-8xl font-black">
