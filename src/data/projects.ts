@@ -3,8 +3,7 @@ export const projects = [
       id: "01",
       title: "Zero-In Admin Suite",
       description:
-        "Built a **real-time test management & analytics platform** to automate test execution, detailed reporting, and validation, replacing manual tracking and improving operational efficiency. Developed **secure OTP + TOTP 2FA, RBAC**, and backend API integrations for configuration management and CRUD operations. Created **responsive, reusable UI components and dashboards** using **React.js, Next.js, Material UI, and Tailwind CSS**.
-",
+        "Built a real-time test management & analytics platform to automate test execution, detailed reporting, and validation, replacing manual tracking and improving operational efficiency. Developed secure OTP + TOTP 2FA, RBAC, and backend API integrations for configuration management and CRUD operations. Created responsive, reusable UI components and dashboards using React.js, Next.js, Material UI, and Tailwind CSS.",
       tech: [
         "Next.js",
         "Tailwind CSS",
